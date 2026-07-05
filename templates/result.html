@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Speech Analysis Report</title>
+
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+
+<body>
+
+<div class="result-card">
+
+    <h1>📊 Public Speaking Analysis Report</h1>
+
+    <br>
+
+    <div class="box">
+
+        <h2>🏆 Overall Score</h2>
+
+        <h1>{{ result.overall_score }}/100</h1>
+
+        <h2>{{ result.rating }}</h2>
+
+        <h3>{{ result.level }}</h3>
+
+    </div>
+
+    <br>
+
+    <div class="box">
+
+        <h3>📝 Transcript</h3>
+
+        <p>{{ result.transcript }}</p>
+
+    </div>
+
+    <br>
+
+    <div class="result">
+
+        <div class="box">
+            <h3>🎤 Speech Length</h3>
+            <h2>{{ result.length_score }}/15</h2>
+        </div>
+
+        <div class="box">
+            <h3>🚀 Speaking Speed</h3>
+            <h2>{{ result.speed_score }}/20</h2>
+        </div>
+
+        <div class="box">
+            <h3>💬 Filler Words</h3>
+            <h2>{{ result.filler_score }}/15</h2>
+        </div>
+
+        <div class="box">
+            <h3>📚 Vocabulary</h3>
+            <h2>{{ result.vocab_score }}/15</h2>
+        </div>
+
+        <div class="box">
+            <h3>🔁 Repeated Words</h3>
+            <h2>{{ result.repeat_score }}/10</h2>
+        </div>
+
+        <div class="box">
+            <h3>💼 Professional Language</h3>
+            <h2>{{ result.professional_score }}/10</h2>
+        </div>
+
+        <div class="box">
+            <h3>✍ Sentence Quality</h3>
+            <h2>{{ result.sentence_score }}/10</h2>
+        </div>
+
+        <div class="box">
+            <h3>⭐ Confidence</h3>
+            <h2>{{ result.confidence_score }}/5</h2>
+        </div>
+
+    </div>
+
+    <br>
+
+    <div class="result">
+
+        <div class="box">
+            <h3>⏱ Speaking Duration</h3>
+            <h2>{{ result.duration }} sec</h2>
+        </div>
+
+        <div class="box">
+            <h3>⚡ Words Per Minute</h3>
+            <h2>{{ result.wpm }} WPM</h2>
+        </div>
+
+    </div>
+
+    <br>
+
+    <div class="box">
+
+        <h3>💬 Detected Filler Words</h3>
+
+        {% if result.fillers %}
+
+        <table>
+
+            <tr>
+                <th>Word</th>
+                <th>Count</th>
+            </tr>
+
+            {% for word, count in result.fillers.items() %}
+
+            <tr>
+                <td>{{ word }}</td>
+                <td>{{ count }}</td>
+            </tr>
+
+            {% endfor %}
+
+        </table>
+
+        {% else %}
+
+        <p>No filler words detected 🎉</p>
+
+        {% endif %}
+
+    </div>
+
+    <br>
+
+    <div class="box">
+
+        <h2>✅ Strengths</h2>
+
+        <ul>
+
+            {% for item in result.strengths %}
+
+            <li>{{ item }}</li>
+
+            {% endfor %}
+
+        </ul>
+
+    </div>
+
+    <br>
+
+    <div class="box">
+
+        <h2>⚠️ Areas to Improve</h2>
+
+        <ul>
+
+            {% for item in result.improvements %}
+
+            <li>{{ item }}</li>
+
+            {% endfor %}
+
+        </ul>
+
+    </div>
+
+    <br>
+
+    {% if result.overall_score >= 90 %}
+
+    <h2 style="text-align:center;color:limegreen;">
+        🌟 Excellent Performance!
+    </h2>
+
+    {% elif result.overall_score >= 75 %}
+
+    <h2 style="text-align:center;color:deepskyblue;">
+        👍 Good Performance!
+    </h2>
+
+    {% elif result.overall_score >= 60 %}
+
+    <h2 style="text-align:center;color:orange;">
+        📈 Keep Practicing!
+    </h2>
+
+    {% else %}
+
+    <h2 style="text-align:center;color:red;">
+        🎯 Practice More and Try Again!
+    </h2>
+
+    {% endif %}
+
+    <br><br>
+
+    <div style="text-align:center;">
+
+        <a href="/">
+
+            <button id="startBtn">
+
+                🔄 Analyze Another Speech
+
+            </button>
+
+        </a>
+
+    </div>
+
+</div>
+
+</body>
+
+</html>
