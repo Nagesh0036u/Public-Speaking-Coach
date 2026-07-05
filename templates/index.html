@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Public Speaking Coach</title>
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='style.css') }}">
+
+</head>
+
+<body>
+
+<div class="container">
+
+    <h1>🎤 Public Speaking Coach</h1>
+
+    <p>
+        Practice your public speaking using your voice or by typing your speech.
+    </p>
+
+    <div class="card">
+
+        <div id="status">
+
+            Click <b>Start Speaking</b> or type your speech below.
+
+        </div>
+
+        <br>
+
+        <div id="timer">
+
+            00:00
+
+        </div>
+
+        <br>
+
+        <textarea
+            id="transcript"
+            placeholder="Speak or type your speech here..."></textarea>
+
+        <br><br>
+
+        <div class="button-group">
+
+            <button
+                type="button"
+                id="startBtn">
+
+                🎙 Start Speaking
+
+            </button>
+
+            <button
+                type="button"
+                id="stopBtn"
+                disabled>
+
+                ⏹ Stop
+
+            </button>
+
+            <button
+                type="button"
+                id="analyzeBtn">
+
+                📊 Analyze Speech
+
+            </button>
+
+        </div>
+
+        <form
+            id="speechForm"
+            action="/analyze"
+            method="POST">
+
+            <input
+                type="hidden"
+                id="hiddenTranscript"
+                name="transcript">
+
+            <input
+                type="hidden"
+                id="hiddenDuration"
+                name="duration">
+
+        </form>
+
+    </div>
+
+</div>
+
+<script src="{{ url_for('static', filename='script.js') }}"></script>
+
+</body>
+
+</html>
